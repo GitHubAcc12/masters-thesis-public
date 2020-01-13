@@ -7,7 +7,7 @@
     - matplotlib
     - argparse
 
-Just run `pip install -r requirements.txt` to ensure they are all installed.
+Just run `pip install -r requirements.txt` to ensure they are all installed. You might have to use pip3 instead of pip, if your environment variable points to a python 2 version.
 
 # Execute
 Call `python toolkit.py -d "path to datafile" -t "threshold for connected components distance"` from a command shell. Depending on which version of python the environment variable points to, you might need to call python3 instead of python.
