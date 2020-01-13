@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import networkx as nx
 import json
+import argparse
 
 
 def EMD(dist1, dist2):
@@ -65,7 +66,14 @@ def create_adj_matrix(connected_components, shape):
     
     
 if __name__=='__main__':
-    data = pd.read_csv('./data/grade_detail_g1000_sorted.csv')
+    # Handle console arguments
+    ap = argparse.ArgumentParser()
+    ap.add_argument('-d', '--dataset', default='./data/grade_detail_g1000_sorted.csv', required=False, help='path to input dataset')
+    ap.add_argument('-t', '--threshold', default=.02, required=False, help='distance threshold for pictured connected component graph')
+    args = vars(ap.parse_args())
+
+    # Parse dataset
+    data = pd.read_csv(args['dataset'])
     grades = data.iloc[:,8:20]
     print(EMD([10,0,0], [0,0,10])) # Max EMD
     distance_matrix = build_distance_matrix(grades)
@@ -88,13 +96,13 @@ if __name__=='__main__':
 
 
     # Graph Part    
-    connected_comp = get_connected_components(distance_matrix, threshold=.0478)
+    connected_comp = get_connected_components(distance_matrix, threshold=float(args['threshold']))
     adj_matrix = create_adj_matrix(connected_comp, distance_matrix.shape)
 
     with open('label_dict.json', 'r') as jsonfile:
         labels = json.load(jsonfile)
     
-    labels_cp = {}
+    labels_cp = {} # Create a copy, because the keys need to be integers
     for key, value in labels.items():
         labels_cp.update({int(key)-1:value})
 
