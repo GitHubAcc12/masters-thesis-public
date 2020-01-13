@@ -11,12 +11,10 @@ def EMD(dist1, dist2):
     norm_d2 = dist2/np.sum(dist2)
 
     dif = norm_d1 - norm_d2
-
-    def inner_sum(arr, end): return np.sum(arr[:end])
     result = 0
 
     for i in range(len(dif)):
-        result += abs(inner_sum(dif, i))
+        result += abs(np.sum(dif[:i]))
     return result/(len(dist1)-1)
 
 
