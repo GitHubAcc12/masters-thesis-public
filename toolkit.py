@@ -65,6 +65,21 @@ def create_adj_matrix(connected_components, shape):
         adj_matrix[component[:], idx] = 1
     return adj_matrix
 
+def extract_grades_from_frame(frame):
+    return frame.iloc[:, 8:20]
+
+def get_filter_for_gpa_range(gpa_range):
+    return lambda d: d.loc[(d['gpa'] >= gpa_range[0]) & (d['gpa'] < gpa_range[1])]
+
+def show_filtered_histogram(data, filter=lambda input_data: input_data.loc[(input_data['gpa'] >= 2.4) & (input_data['gpa'] < 2.6)]):
+    if filter != None:
+        data = filter(data)
+    grades = extract_grades_from_frame(data)
+    plt.figure()
+    for i in range(len(grades)):
+        plt.plot(grades.iloc[i].to_numpy())
+    
+
 
 if __name__ == '__main__':
     # Handle console arguments
@@ -73,16 +88,33 @@ if __name__ == '__main__':
                     required=False, help='path to input dataset')
     ap.add_argument('-t', '--threshold', default=.02, required=False,
                     help='distance threshold for pictured connected component graph')
+    ap.add_argument('-r', '--range', default='2.4,2.6', required=False,
+                    help='range of gpas to consider')       
     args = vars(ap.parse_args())
 
     # Parse dataset
     data = pd.read_csv(args['dataset'])
-    grades = data.iloc[:, 8:20]
     print(EMD([10, 0, 0], [0, 0, 10]))  # Max EMD
+
+    # Full dataset
+    grades = extract_grades_from_frame(data)
     distance_matrix = build_distance_matrix(grades)
+
+    # Dataset restricted by gpa parameter
+    filter = get_filter_for_gpa_range([float(i) for i in args['range'].split(',')])
+    res_data = filter(data)
+    res_data.head()
+    res_grades = extract_grades_from_frame(res_data)
+    res_distance_matrix = build_distance_matrix(res_grades)
+
+    # Comparison restricted vs unrestricted EMD-Matrix mean value 
+    # For default gpa range: 0.0864 (unr.) vs  0.026 (res.)
+    print(f'Mean of unrestricted distance matrix: {distance_matrix.mean()} vs restricted distance matrix: {res_distance_matrix.mean()}')
+
+
     max_distance_index = np.unravel_index(
         np.argmax(distance_matrix), distance_matrix.shape)
-    print(f'Max Distance between: {max_distance_index}')
+    print(f'Max Distance between (unrestricted): {max_distance_index}')
 
     a_distance_matrix = np.array(
         [np.mean(distance_matrix[i]) for i in range(len(grades))])
@@ -110,5 +142,7 @@ if __name__ == '__main__':
         labels_cp.update({int(key)-1: value})
 
     show_graph_with_labels(adj_matrix, labels_cp)
+
+    show_filtered_histogram(res_data, None)
 
     plt.show()  # Show all plots at the same time
