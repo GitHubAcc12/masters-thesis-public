@@ -36,5 +36,9 @@ if __name__ == '__main__':
             df[['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F, F+']].sum())
 
     matrix = build_distance_matrix(pd.Series(distributions))
+
+    for i in range(len(distributions)):
+        print(f'Number of grades given out in year 201{i+4}: {sum(distributions[i])}')
+
     print('EMD Matrix multiplied with 100:')
     print(matrix*100)
