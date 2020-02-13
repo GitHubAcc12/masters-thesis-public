@@ -90,7 +90,7 @@ def show_filtered_histogram(data, filter=lambda input_data: input_data.loc[(inpu
 if __name__ == '__main__':
     # Handle console arguments
     ap = argparse.ArgumentParser()
-    ap.add_argument('-d', '--dataset', default='./data/csv/grade_detail_g1000_sorted.csv',
+    ap.add_argument('-d', '--dataset', default='./data/grade_detail_g1000_sorted.csv',
                     required=False, help='path to input dataset')
     ap.add_argument('-t', '--threshold', default=.03, required=False,
                     help='distance threshold for pictured connected component graph')
