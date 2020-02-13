@@ -90,7 +90,7 @@ def show_filtered_histogram(data, filter=lambda input_data: input_data.loc[(inpu
 if __name__ == '__main__':
     # Handle console arguments
     ap = argparse.ArgumentParser()
-    ap.add_argument('-d', '--dataset', default='./data/grade_detail_g1000_sorted.csv',
+    ap.add_argument('-d', '--dataset', default='./data/csv/grade_detail_g1000_sorted.csv',
                     required=False, help='path to input dataset')
     ap.add_argument('-t', '--threshold', default=.03, required=False,
                     help='distance threshold for pictured connected component graph')
@@ -105,12 +105,12 @@ if __name__ == '__main__':
     args = vars(ap.parse_args())
 
     # Parse dataset
-    data = pd.read_csv(args['dataset'])
+    data = pd.read_csv(args['dataset']).rename(columns=lambda x: x.strip())
     print(EMD([10, 0, 0], [0, 0, 10]))  # Max EMD
 
     # Ignore classes with too few students
     data = data.loc[pd.to_numeric(
-        data['Official Enrollmt']) >= int(args['enrollment'])].fillna(0).rename(columns=lambda x: x.strip())
+        data['Official Enrollmt']) >= int(args['enrollment'])].fillna(0)
 
     # print(data)
 
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     filter = get_filter_for_gpa_range(
         [float(i) for i in args['range'].split(',')])
     res_data = filter(data)
-    res_data.head()
+    # res_data.head()
     res_grades = extract_grades_from_frame(res_data)
     res_distance_matrix = build_distance_matrix(res_grades)
 
