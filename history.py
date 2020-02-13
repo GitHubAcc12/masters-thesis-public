@@ -9,9 +9,9 @@ if __name__ == '__main__':
     ap.add_argument('-d', '--datadir', default='./data/',
                     required=False, help='path to input dataset')
     ap.add_argument('-c', '--class', default='Mathematical Sciences',
-                    required=False, help='Classes from which department?')
+                    required=False, help='Department that offers the classes, default is Mathematical Sciences')
     ap.add_argument('-n', '--number', default='', required=False,
-                    help='Look at specific classes from the department. Default department is Math.')
+                    help='Number code of the class. (Not Section')
     args = vars(ap.parse_args())
 
     # Parse datasets
