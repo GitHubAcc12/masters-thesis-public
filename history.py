@@ -21,9 +21,12 @@ if __name__ == '__main__':
         df = pd.read_csv(f'{args["datadir"]}Fall_201{i}.csv').rename(
             columns=lambda x: x.strip())
 
-        # Remove Class totals and filter department
-        df = df.loc[(df['Cla Class Section'] != 'Course Total') &
-                    (df['Cla Subject Ldesc'] == args['class'])]
+        # Remove Class Totals
+        df = df.loc[df['Cla Class Section'] != 'Course Total']
+
+        # Filter department
+        if args['class'].lower() != 'all':
+            df = df.loc[df['Cla Subject Ldesc'] == args['class']]
 
         if args['number'] != '':
             df = df.loc[df['Cla Catalog Nbr'] == int(args['number'])]
@@ -33,4 +36,5 @@ if __name__ == '__main__':
             df[['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F, F+']].sum())
 
     matrix = build_distance_matrix(pd.Series(distributions))
-    print(matrix)
+    print('EMD Matrix multiplied with 100:')
+    print(matrix*100)
