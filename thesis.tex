@@ -27,8 +27,8 @@
 %\usepackage[bottom=1.45in, top=1in, left=1in, right=1in]{geometry}
 				
 %%% Title, included  several times
-\newcommand{\mytitle}{\Large \textsc{\mbox{ Master}\\
-  \mbox{Thesis}}\\[20pt] \normalsize by\\
+\newcommand{\mytitle}{\Large \textsc{\mbox{ Earth Mover's Distance between }\\
+  \mbox{Grade Distribution Data with Fixed Mean}}\\[20pt] \normalsize by\\
   [20pt] \name  \\[\pts] \vs }
 \newenvironment{step}%
 {\begin{stepp}\rm}{\rm \end{stepp}}
@@ -452,8 +452,9 @@ Computing the weak compositions of 2, that consist of 3 elements gives us all th
 
 In accordance with the polynomial $C$, there are only two possible pairs with an EMD of 4: $\{(2, 0, 0), (0, 0, 2)\}$ and the inverse  $\{(0,0,2),(2,0,0)\}$.
 
-\setcounter{section}{1}
-\section{Including Grade Information}
+\setcounter{section}{0}
+\setcounter{chapter}{3}
+\chapter{Main Result}
 To achieve the goal of recording information on the GPA in the generating function, first define $\weightedTotal(\mu)$  as a weighted total of a distribution $\mu$ with elements $\{\mu_1, …, \mu_n\}$, specifically
 $$\weightedTotal(\mu) = \sum_{i=0}^{n-1}i\mu_{i+1}$$
 where $n$ is the number of elements in $\mu$. 
@@ -534,7 +535,7 @@ Which means that there are 2 pairs of compositions with weighted total of  2 and
 
 
 \setcounter{section}{2}
-\section{Theoretical Mean EMD}
+\section{Theoretical Mean EMD Example}
 
 To get the theoretical average EMD of classes with 30 students, where only the grades A through F  (no +/-) are given out, the polynomial $H_{5,5}(t, z, g_1, g_2)$ has to be computed and expanded in $t$ to degree 30. Because this way of computing the polynomial requires more resources than available, the polynomial will be computed in a way similar to what was briefly shown in Section \ref{sec:genfemd}.
 Instead of finding the entire polynomial $H_{5,5}(t, z, g_1, g_2)$ , the weak compositions of 30 with 5 elements were computed in Python, see Listing \ref{lst:pycomps}. From all the compositions, only those with a weighted total value $\weightedTotal$ of 90 were considered. The required polynomial in $z$ was then computed by counting the number $n$ of pairs with distance $i$, put together to the monomials $nz^i$.
@@ -545,7 +546,7 @@ Instead of finding the entire polynomial $H_{5,5}(t, z, g_1, g_2)$ , the weak co
 	P(z)=297z^{0}+2480z^{2}+6398z^{4}+9534z^{6}+11386z^{8}+11272z^{10}+10412z^{12}+\\8676z^{14}+7220z^{16}+5562z^{18}+4372z^{20}+3184z^{22}+2408z^{24}+\\1684z^{26}+1218z^{28}+820z^{30}+552z^{32}+348z^{34}+206z^{36}+108z^{38}+50z^{40}+18z^{42}
 \end{multline*}
 
-Examining the structure of $P(z)$, it can be seen that the coefficients of  $z$ sum up to the number of all pairs examined. Since the sum of these coefficients is the same as $P(1)$, the number of pairs can be acquired by computing that: $P(1)=$.
+Examining the structure of $P(z)$, it can be seen that the coefficients of  $z$ sum up to the number of all pairs examined. Since the sum of these coefficients is the same as $P(1)$, the number of pairs can be acquired by computing that: $P(1)=88205$. See figure \ref{fig:comphist} for a histogram showing the distributions of EMDs between all the possible compositions.
 Additionally, since the EMD encoded in the exponent $k$ of $nz^k$ is the distance between all the $n$ distribution pairs, it follows that the coefficients $n$ of the derivative of $P$ with respect to $z$, $P'$, sum up to a total that weighs the number of pairs by the distance between each of their elements.
 
 This implies, that to compute the average EMD between all possible distributions consisting of 30 grades that sum up to 90, it suffices to divide the weighted sum of the numbers of pairs $P'(1)$ by the total number of pairs $P(1)$, which results in:
@@ -556,10 +557,17 @@ $$\frac{P'(z)}{120P(z)} = \frac{1115148}{120\cdot 88205} \approx 0.10536$$
 The unit normalized EMD for classes of 30 students without grade restrictions has a value of 0.2191 and was computed in \cite{bourn2019expected}. 
 One can see, that the theoretical mean EMD between classes of 30 students is almost exactly twice as high when there are no grade restrictions, compared to when the GPA is restricted to be a 3.0.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{./images/histogram.png}
+	\caption{Histogram of the distribution of EMDs between all possible compositions}
+	\label{fig:comphist}
+\end{figure}
 
-\setcounter{chapter}{3}
+
+\setcounter{chapter}{4}
 \setcounter{table}{0}
-\chapter{Examining Grade Data}
+\chapter{Real Grade Data}
 In this chapter, the theoretical results of the mean EMD with a fixed GPA are compared to  a real world dataset, coming from the Section Attrition and Grade Report published by the Office of Assessment and Institutional Research at the University of Wisconsin-Milwaukee \cite{gradeData}. It contains the grade distributions of classes in the fall semesters from 2014 to 2018.
 In the last chapter, we computed the theoretical mean EMD for grade distributions of classes with 30 students, average GPA of 3.0, where only five  grades given out, which corresponds to the letter grades A through F without plus or minus.
 
@@ -567,7 +575,7 @@ To compare the theoretical result to the real world data, the dataset has to be 
 
 
 \setcounter{section}{0}
-\section{Description of Dataset}
+\section{Examining Collected Grade Data}
 The dataset for the fall semester of 2018 contains data from about 3300 grade distributions. Restricting the data to only classes with exactly 30 students and an exact GPA of 3.0 leaves less than 10 results, so the limitations were broadened to 25 - 35 students with a GPA between 2.9 and 3.1. 
 
 Applying these restrictions leaves 81 classes to be further examined. 
@@ -587,7 +595,8 @@ Table \ref{tab:fall2018data} shows the first 20 entries of the data for 2018.
 		6  & Business Administration         & 451   & 29                & 2.913 & 3  & 20 & 2 & 2 & 0 \\
 		7  & Business Administration         & 453   & 25                & 2.988 & 11 & 9  & 2 & 2 & 1 \\
 		8  & Business Administration         & 454   & 27                & 313 & 7  & 11 & 7 & 0 & 0 \\
-		9  & Business Administration         & 551   & 34                & 2.921 & 11 & 12 & 8 & 3 & 0 
+		9  & Business Administration         & 551   & 34                & 2.921 & 11 & 12 & 8 & 3 & 0 \\
+		\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
 	\end{tabular}
 	\caption{First entries of the Fall 2018 data, restricted to classes with 25-35 students and a GPA between 2.9 and 3.1}
 	\label{tab:fall2018data}
@@ -597,11 +606,12 @@ Table \ref{tab:fall2018data} shows the first 20 entries of the data for 2018.
 The data was examined using Python, and the EMD of years 2014 through 2018 can be seen in table \ref{tab:emd_results}.
 
 \begin{table}[]
+	\centering
 	\begin{tabular}{l||llllll}
-		& 2014     & 2015     & 2016     & 2017     & 2018     & Theoretical Result \\ \hline
-		EMD & 16.26342 & 15.80751 & 13.18651 & 15.41643 & 16.32639 & 12.64268           \\
-		Difference & 28.63902\% & 25.03289\% & 4.30152\% & 21.93955\% & 29.13709\% \\
-		Unit normalized EMD & 0.08186 & 0.08014 & 0.07724 & 0.08058 & 0.07775 \\
+		& 2014     & 2015     & 2016     & 2017     & 2018     & Theory \\ \hline
+		EMD & 16.2634 & 15.8075 & 13.1865 & 15.4164 & 16.3264 & 12.6427           \\
+		Difference & 28.6390\% & 25.0329\% & 4.3015\% & 21.9396\% & 29.1371\% \\
+		Normalized & 0.0819 & 0.0801 & 0.0772 & 0.0806 & 0.0778 \\
 		Classes & 79 & 63 & 84 & 77 & 72 
 	\end{tabular}
 	\caption{Mean EMD for the fall semesters 2014 through 2018, compared to the theoretical result}
@@ -619,7 +629,7 @@ To further examine the given grade data, it can be represented as a graph, which
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{./images/n2018LLP.png}
-	\caption{Distance threshold times 1000 versus number of connected components }
+	\caption{Distance threshold versus number of connected components }
 	\label{fig:LLP18}
 \end{figure}
 
@@ -653,9 +663,9 @@ For instance, while $\{2, 8, 32, 58, 48\}$ form a connected component in figure 
 \end{figure}
 
 
-\setcounter{chapter}{4}
+\setcounter{chapter}{5}
 \setcounter{table}{0}
-\chapter{Python Code}
+\chapter{Data Science Approach}
 The dataset was examined in Python, using the library \code{pandas}. Among others, \code{pandas} includes functions to read the dataset from the given comma-separated-value (csv) format into a table, called a dataframe. \\
 Dataframes  consist of  columns, that can be named with strings,  and indexed rows, as visible in table \ref{tab:fall2018data}. \code{pandas} includes Create-Read-Update-Delete (CRUD) operations for dataframes. \\
 CRUD refers to the major functions of relational database management systems, and corresponding operations are also provided by the Structured Query Language (SQL, see \cite{date1993iso}) or the Hypertext Transfer Protocol (HTTP, see \cite{fielding1999hypertext}).\\
@@ -770,7 +780,7 @@ The last line of listing \ref{lst:pypd} extracts only the necessary grade column
 %\begin{appendices}
 \clearpage
 \appendix
-\setcounter{chapter}{5}
+\setcounter{chapter}{6}
 \setcounter{table}{0}
 \chapter{Appendix Fall 2018 Grade Dataset}
 \label{ch:appendix}
