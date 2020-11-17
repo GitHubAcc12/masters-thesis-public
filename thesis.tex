@@ -204,7 +204,7 @@
 	at\\
 	 \ \\
 	The University of Wisconsin-Milwaukee\\ 
-	May 2020
+	August 2020
 \end{center}
 
 \pagebreak
@@ -306,7 +306,7 @@ The EMD is defined as
 \[
 \pEMD(\mu, \nu) = \inf_{J \in \mcJ_{\mu \nu}} \sum_{i,j = 1}^n |i-j| J_{ij}.
 \]
-In this thesis, the practical use of the EMD will be to measure the distance between grade distributions, specifically of classes with 30 students and the grades A, B, C, D and F. Each letter grade is assigned a number by the standard \emph{Grade Point Average} (GPA): A is 4.0, B is  3.0, C is 2.0, D is 1.0 and F corresponds to 0.
+In this thesis, the practical use of the EMD will be to measure the distance between grade distributions, specifically of classes with 30 students and the grades A, B, C, D and F. Each letter grade is assigned a number by the standard Grade Point Average (GPA): A is 4.0, B is  3.0, C is 2.0, D is 1.0 and F corresponds to 0.
 In order to compute the relative distance between two grades, it is only necessary to compute the absolute value of the point grade difference: for example, the distance of a B (3.0) to a D is $|3.0-1.0|=2$ .
 Some useful examples are given in \cite{bourn2019expected}: suppose there is a class with 30 students and the five grades A-F. Three possible grade distributions are given by 
 \[
@@ -329,7 +329,7 @@ Comparing distributions $X$ and $Y$, one notices they were identical if  12 A gr
 \end{array}
 \right]
 \]
-where the columns and rows correspond to (A, B, C, D, F) and entry $(i,j)$ stands for the number of grades that were moved from position $i$ in $X$ to position $j$ in $Y$. The diagonal entries do not represent any grade change. The row sums return the $X$ distribution, while the column sums return the $Y$ distribution. The total EMD value is 26.
+where the columns and rows correspond to (A, B, C, D, F) and entry $(i,j)$ stands for the number of grades that were moved from position $i$ in $X$ to position $j$ in $Y$. The diagonal entries represent no grade change. The row sums return the $X$ distribution, while the column sums return the $Y$ distribution. The total EMD value is 26, which corresponds to the sum of the off-diagonal.
 
 The grade movements between $Y$ and $Z$ are encoded in the matrix
 \[
@@ -343,7 +343,7 @@ The grade movements between $Y$ and $Z$ are encoded in the matrix
 \end{array}
 \right].
 \]
-also with the EMD 26, and the movements between $X$ and $Z$ are encoded in
+with the EMD 23, and the movements between $X$ and $Z$ are encoded in
 \[
 \left[
 \begin{array}{ccccc}
@@ -381,7 +381,7 @@ this time with different GPAs, that are used to give an example for a distance m
 
 This thesis will focus on the EMD of grade distributions with a fixed GPA. Fixing the number of students to 30 and the number of grades to 5, gives a finite number of possible distributions, which will be examined theoretically. 
 Additionally, there will be an examination of real world data from the University of Wisconsin-Milwaukee. Grade distributions from the years 2014 to 2018 will be investigated, and considering only classes with 30 students and a fixed GPA allows for a comparison to the theoretical result.
-At last, the classes from one year will be examined in more detail. If some grade distributions have a particularly low EMD, they will form a connected component that is persistent through a varying number of distance thresholds. These components will be visual in EMD based clustering of the grade data.
+Finally, the classes from one year will be examined in more detail. If some grade distributions have a particularly low EMD, they will form a connected component that is persistent through a varying number of distance thresholds. These components will be visual in EMD-based clustering of the grade data.
 
 
 \setcounter{chapter}{2}
@@ -409,7 +409,7 @@ where $t$, $z$ are indeterminates and $\mcC(s,n)$ are the weak compositions of $
 The coefficient of $t^s$  is a polynomial in $z$, which records the distribution of the discrete EMD values. 
 
 
-
+\setcounter{section}{2}
 $H_{p,q}$  is computed by:
 \begin{theorem}\label{thm:HS}
 	For positive integers $p$ and $q$,
@@ -419,7 +419,7 @@ $H_{p,q}$  is computed by:
 \begin{proof}
 	The proof is given in \cite{bourn2019expected}.
 \end{proof}
-
+\setcounter{section}{1}
 
 For $p=q=3$, this results in
 $$H_{3, 3}(t, z)=\frac{-t^3 z^4-t^2 (2 z+1) z^2+t (z+2) z+1}{(1-t)^3 (1-t z)^2 \left(1-t z^2\right)}.$$
@@ -469,8 +469,9 @@ g_1^{\weightedTotal(\mu)}g_2^{\weightedTotal(\nu)}z^{\tiny \cEMD(\mu,\nu)} \righ
 
 Now, the coefficient of $t^s$ in $H_{p,q}$ is a polynomial in $z$, $g_1$ and $g_2$ whose coefficients record the distribution of  the values of $\cEMD(\mu, \nu)$, given the values of $\weightedTotal(\mu)$ and $\weightedTotal(\nu)$ saved in the exponents of $g_1$ and $g_2$.
 
-To compute values of $H_{p,q}$, consider the following theorem \ref{thm:HSg}.
+To compute values of $H_{p,q}$, consider the following Theorem \ref{thm:HSg}.
 
+\setcounter{section}{3}
 \begin{theorem}\label{thm:HSg}
  	For positive integers $p$ and $q$,
  	\[ H_{p,q}(z,t, g_1, g_2) = \frac{ H_{p-1,q}(z,t, g_1, g_2) + H_{p,q-1}(z,t, g_1, g_2) - H_{p-1,q-1}(z,tg_1, g_2) }{1- z^{|p-q|} tg_1^{p-1}g_2^{q-1}}  \]
@@ -495,7 +496,7 @@ To compute values of $H_{p,q}$, consider the following theorem \ref{thm:HSg}.
  	\]
  	which coincides with the definition of $H_{p,q}(z, t, g_1, g_2)$. 
  	Like in \cite{bourn2019expected}, each monomial has non negative integer matrix $J$ with support on a chain as exponents. For $p$ by $q$ matrices, this chain terminates at or before $x_{p,q}^{J_{p,q}}$.
- 	To factor in the cost of moving an element from position $p$ to $q$ in a distribution, the indeterminate $z$ has to be multiplied with $z^{|p-q|}$. Additionally to achieve the weighting of the totals in the exponents of $g_i$, the monomial has to be multiplied with $g_1^{p-1}g_2^{q-1}$. 
+ 	To factor in the cost of moving an element from position $p$ to $q$ in a distribution, the indeterminate $z$ has to be multiplied with $z^{|p-q|}$. Additionally, to achieve the weighting of the totals in the exponents of $g_i$, the monomial has to be multiplied with $g_1^{p-1}g_2^{q-1}$. 
  	So in total, each monomial is multiplied with 
  	$$z^{|p-q|}g_1^{p-1}g_2^{q-1}t$$
  	and contributes $\sum_{J_{p,q}=0}^{\infty}(z^{|p-q|}g_1^{p-1}g_2^{q-1}t)^{J_{p,q}}$ to all monomials.
@@ -504,7 +505,7 @@ To compute values of $H_{p,q}$, consider the following theorem \ref{thm:HSg}.
  	
  	 %the preceding variables in the monomial contain $x_{pj}$ for some $1 \leq j \leq q$ or $x_{iq}$ for some $1 \leq i \leq p$, but not both, since the support of the exponent matrix is on a chain.
  	%The first monomial is counted in $H_{p,q-1}$ and the second in $H_{p-1,q}$. 
- 	In total, the sum $H_{p,q-1}+H_{p-1,q}$ counts all monomials, but if there exists a $J_{ij}>0$ with $i<p$ and $j<q$ it is counted twice, so it has to be subtracted once by subtracting $H_{p-1, q-1}$ from the total, leaving
+ 	The sum $H_{p,q-1}+H_{p-1,q}$ counts all monomials, but if there exists a $J_{ij}>0$ with $i<p$ and $j<q$ it is counted twice, so it has to be subtracted once by subtracting $H_{p-1, q-1}$ from the total, leaving
  	$$H_{p,q-1}+H_{p-1,q}-H_{p-1, q-1}$$
  	All monomials are counted exactly once and weighted correctly in the product:
  	\[ 
@@ -513,7 +514,7 @@ To compute values of $H_{p,q}$, consider the following theorem \ref{thm:HSg}.
  	
  	
 \end{proof}
-
+\setcounter{section}{0}
 
 
 For $p=q=3$, the adjusted formula for $H$ expanded to a series in $t$ was computed using Mathematica:
@@ -533,14 +534,13 @@ Specifically, $g_1^i$ means, that $\weightedTotal(\mu)=i$ must apply to the comp
 
 Given this information, in order to examine the EMD of compositions with a fixed value of $\weightedTotal$, the coefficient of not only $t^2$, but of $g_1^ig_2^jt^2$ has to be copmuted. Let $i=j=2$, this results again in a polynomial of $z$:
 $$P(z)=2 z^2+2$$
-Which means that there are 2 pairs of compositions with weighted total of  2 and a distance of 2, and there are 2 pairs of compositions with a weighted total of 0 and a distance of 0. As seen in table \ref{tab:cs_2_3}, the first monomial refers to the pairs $\{(1, 0, 1), (0, 2, 0)\}$ and $ \{(0, 2, 0), (1, 0, 1)\}$, the second monomial to the two pairs $\{(1, 0, 1), (1, 0, 1)\}$ and $\{(0, 2, 0), (0, 2, 0)\}$.
+Which means that there are 2 pairs of compositions with weighted total of  2 and a distance of 2, and there are 2 pairs of compositions with a weighted total of 0 and a distance of 0. As seen in Table \ref{tab:cs_2_3}, the first monomial refers to the pairs $\{(1, 0, 1), (0, 2, 0)\}$ and $ \{(0, 2, 0), (1, 0, 1)\}$, the second monomial to the two pairs $\{(1, 0, 1), (1, 0, 1)\}$ and $\{(0, 2, 0), (0, 2, 0)\}$.
 
 
-\setcounter{section}{2}
 \section{Theoretical Mean EMD Example}
 
 To get the theoretical average EMD of classes with 30 students, where only the grades A through F  (no +/-) are given out, the polynomial $H_{5,5}(t, z, g_1, g_2)$ has to be computed and expanded in $t$ to degree 30. Because this way of computing the polynomial requires more resources than available, the polynomial will be computed in a way similar to what was briefly shown in Section \ref{sec:genfemd}.
-Instead of finding the entire polynomial $H_{5,5}(t, z, g_1, g_2)$ , the weak compositions of 30 with 5 elements were computed in Python, see Listing \ref{lst:pycomps}. From all the compositions, only those with a weighted total value $\weightedTotal$ of 90 were considered. The required polynomial in $z$ was then computed by counting the number $n$ of pairs with distance $i$, put together to the monomials $nz^i$.
+Instead of finding the entire polynomial $H_{5,5}(t, z, g_1, g_2)$ , the weak compositions of 30 with 5 elements were computed in Python, see Listing \ref{lst:pycomps}. From all the compositions, only those with a weighted total value $\weightedTotal$ of 90 were considered (corresponding to a B or 3.0 average grade). The required polynomial in $z$ was then computed by counting the number $n$ of pairs with distance $i$, put together to the monomials $nz^i$.
 
 %Then, extracting the coefficient of $g_1^{90}g_2^{90}t^{30}$  gives the polynomial:
 
@@ -548,7 +548,7 @@ Instead of finding the entire polynomial $H_{5,5}(t, z, g_1, g_2)$ , the weak co
 	P(z)=297z^{0}+2480z^{2}+6398z^{4}+9534z^{6}+11386z^{8}+11272z^{10}+10412z^{12}+\\8676z^{14}+7220z^{16}+5562z^{18}+4372z^{20}+3184z^{22}+2408z^{24}+\\1684z^{26}+1218z^{28}+820z^{30}+552z^{32}+348z^{34}+206z^{36}+108z^{38}+50z^{40}+18z^{42}
 \end{multline*}
 
-Examining the structure of $P(z)$, it can be seen that the coefficients of  $z$ sum up to the number of all pairs examined. Since the sum of these coefficients is the same as $P(1)$, the number of pairs can be acquired by computing that: $P(1)=88205$. See figure \ref{fig:comphist} for a histogram showing the distributions of EMDs between all the possible compositions.
+Examining the structure of $P(z)$, it can be seen that the coefficients of  $z$ sum up to the number of all pairs examined. Since the sum of these coefficients is the same as $P(1)$, the number of pairs can be acquired by computing that: $P(1)=88205$. See Figure \ref{fig:comphist} for a histogram showing the distributions of EMDs between all the possible compositions.
 Additionally, since the EMD encoded in the exponent $k$ of $nz^k$ is the distance between all the $n$ distribution pairs, it follows that the coefficients $n$ of the derivative of $P$ with respect to $z$, $P'$, sum up to a total that weighs the number of pairs by the distance between each of their elements.
 
 This implies, that to compute the average EMD between all possible distributions consisting of 30 grades that sum up to 90, it suffices to divide the weighted sum of the numbers of pairs $P'(1)$ by the total number of pairs $P(1)$, which results in:
@@ -578,10 +578,10 @@ To compare the theoretical result to the real world data, the dataset has to be 
 
 \setcounter{section}{0}
 \section{Examining Collected Grade Data}
-The dataset for the fall semester of 2018 contains data from about 3300 grade distributions. Restricting the data to only classes with exactly 30 students and an exact GPA of 3.0 leaves less than 10 results, so the limitations were broadened to 25 - 35 students with a GPA between 2.9 and 3.1. 
+The dataset for the fall semester of 2018 contains data from about 3300 grade distributions. Restricting the data to only classes with exactly 30 students and an exact GPA of 3.0 leaves fewer than 10 results, so the limitations were broadened to 25 - 35 students with a GPA between 2.9 and 3.1. 
 
-Applying these restrictions leaves 81 classes to be further examined. 
-Table \ref{tab:fall2018data} shows the first 20 entries of the data for 2018.
+Applying these restrictions leaves 71 classes to be further examined. 
+Table \ref{tab:fall2018data} shows the first 10 entries of the data for 2018.
 
 
 \begin{table}[]
@@ -589,14 +589,14 @@ Table \ref{tab:fall2018data} shows the first 20 entries of the data for 2018.
 	\begin{tabular}{c||ccccccccc}
 		& Cla Subject Ldesc               & Class & Enrollment & GPA   & A    & B    & C   & D   & F   \\ \hline
 		0  & Music                           & 127   & 35                & 2.98  & 11 & 14 & 7 & 1 & 1 \\
-		1  & Business Administration         & 335   & 30                & 347 & 12 & 9  & 3 & 3 & 1 \\
-		2  & Business Administration         & 404   & 34                & 319 & 11 & 14 & 8 & 0 & 1 \\
+		1  & Business Administration         & 335   & 30                & 3.047 & 12 & 9  & 3 & 3 & 1 \\
+		2  & Business Administration         & 404   & 34                & 3.019 & 11 & 14 & 8 & 0 & 1 \\
 		3  & Business Administration         & 404   & 25                & 2.987 & 6  & 13 & 5 & 0 & 0 \\
 		4  & Business Administration         & 409   & 31                & 2.956 & 5  & 20 & 4 & 1 & 1 \\
 		5  & Business Administration         & 409   & 34                & 2.961 & 3  & 27 & 4 & 0 & 0 \\
 		6  & Business Administration         & 451   & 29                & 2.913 & 3  & 20 & 2 & 2 & 0 \\
 		7  & Business Administration         & 453   & 25                & 2.988 & 11 & 9  & 2 & 2 & 1 \\
-		8  & Business Administration         & 454   & 27                & 313 & 7  & 11 & 7 & 0 & 0 \\
+		8  & Business Administration         & 454   & 27                & 3.013 & 7  & 11 & 7 & 0 & 0 \\
 		9  & Business Administration         & 551   & 34                & 2.921 & 11 & 12 & 8 & 3 & 0 \\
 		\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
 	\end{tabular}
@@ -613,14 +613,13 @@ The data was examined using Python, and the EMD of years 2014 through 2018 can b
 		& 2014     & 2015     & 2016     & 2017     & 2018     & Theory \\ \hline
 		EMD & 16.2634 & 15.8075 & 13.1865 & 15.4164 & 16.3264 & 12.6427           \\
 		Difference & 28.6390\% & 25.0329\% & 4.3015\% & 21.9396\% & 29.1371\% \\
-		Normalized & 0.0819 & 0.0801 & 0.0772 & 0.0806 & 0.0778 \\
 		Classes & 79 & 63 & 84 & 77 & 72 
 	\end{tabular}
-	\caption{Mean EMD for the fall semesters 2014 through 2018, compared to the theoretical result}
+	\caption{Mean EMD for the Fall Semesters 2014 through 2018, compared to the theoretical result}
 	\label{tab:emd_results}
 \end{table}
 
-In almost all the years examined, the mean EMD is always more than 20\% higher than the theoretical result, with the largest striking differences recorded in 2014 and 2018 with EMD values that are about 28.6\% and 29.1\% larger. At least part of the difference is accounted for by the varying class sizes that had to be considered in the real world data. In the most disadvantegeous case, the difference in the number of students for a pair of classes is 10, which adds a value of at least 10 to the absolute EMD between this pair.
+In almost all the years examined, the mean EMD is always more than 20\% higher than the theoretical result, with the largest striking differences recorded in 2014 and 2018 with EMD values that are about 28.6\% and 29.1\% larger. At least part of the difference is accounted for by the varying class sizes that had to be considered in the real world data. For example if the two classes compared have 25 and 35 students, the difference in the number of students for a pair of classes is 10, which adds a value of  10 to the absolute EMD between this pair.
 The only exception is the year of 2016, where the mean EMD was only 4.3\% larger than the theoretical result.
 
 
@@ -636,11 +635,11 @@ To further examine the given grade data, it can be represented as a graph, which
 \end{figure}
 
 A connected component, per definition, is a set of vertices in a graph that are connected by a walk \cite{porter2009communities}. 
-Figure \ref{fig:LLP18} refers to the dataset of Fall 2018, and shows the number of connected components as the threshold $t$ increases. With threshold $t=0$, every pair of vertices is disconnected and builds an individual connected component. As the threshold increases, there is an increasing number of edges, up to a point where the entire graph builds one connected component, at around $t=0.05$.
+Figures \ref{fig:LLP18}-\ref{fig:cluster18t017} refer to the dataset of Fall 2018, and shows the number of connected components as the threshold $t$ increases. With threshold $t=0$, every pair of vertices is disconnected and builds an individual connected component. As the threshold increases, there is an increasing number of edges, up to a point where the entire graph builds one connected component, at around $t=0.05$.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{./images/n2018_th_0p035.png}
+	\includegraphics[width=\textwidth]{./images/n2018_th_0p035_2.png}
 	\caption{Cluster with threshold 0.035}
 	\label{fig:cluster18t035}
 \end{figure}
@@ -649,20 +648,23 @@ Figure \ref{fig:cluster18t035} shows the graph when $t=0.035$, which is about ha
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{./images/n2018_th_0p0185.png}
+	\includegraphics[width=\textwidth]{./images/n2018_th_0p0185_2.png}
 	\caption{Cluster with threshold 0.0185}
 	\label{fig:cluster18t0185}
 \end{figure}
 
-Looking at figure \ref{fig:LLP18}, there is a striking persistence in the number of connected components when $t \in [0.017, 0.0185]$. Figures \ref{fig:cluster18t0185} and \ref{fig:cluster18t017} show graphs with threshold values at boths ends of the interval, and it can be seen that some of the connected components in figure \ref{fig:cluster18t0185} are split apart in figure \ref{fig:cluster18t017}.
-For instance, while $\{2, 8, 32, 58, 48\}$ form a connected component in figure \ref{fig:cluster18t0185}, they are broken apart into the components $\{2, 8, 32\}$ and $\{48, 58\}$ in figure \ref{fig:cluster18t017}.
+Looking at Figure \ref{fig:LLP18}, there is a striking persistence in the number of connected components when $t \in [0.017, 0.0185]$. Figures \ref{fig:cluster18t0185} and \ref{fig:cluster18t017} show graphs with threshold values at boths ends of the interval, and it can be seen that some of the connected components in Figure \ref{fig:cluster18t0185} are split apart in Figure \ref{fig:cluster18t017}.
+For instance, while $\{2, 8, 32, 48, 58\}$ form a connected component in Figure \ref{fig:cluster18t0185}, they are broken apart into the components $\{2, 8, 32\}$ and $\{48, 58\}$ in Figure \ref{fig:cluster18t017}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth]{./images/n2018_th_0p017.png}
+	\includegraphics[width=\textwidth]{./images/n2018_th_0p017_2.png}
 	\caption{Cluster with threshold 0.017}
 	\label{fig:cluster18t017}
 \end{figure}
+
+Ranges of persistence, for example $[0.017, 0.0185]$, can be compared to the theoretical mean EMD. The lower endpoint of the interval is 16\%, the upper is approximately 18\% of the theoretical mean EMD. \\
+In general, Figures \ref{fig:cluster18t035}-\ref{fig:cluster18t017} show the breaking apart of connected components with decreasing distance threshold. The clustering allows to examine the most persistent components among the graph with varying threshold. The two vertices with identifiers 66 and 39 built a single connected component, which turned out to be the most persistent one.  For every $t \in [0, 0.0229]$, the component consisted of only those two vertices, which represent the classes \emph{Nursing 673} and \emph{English 205} respectively, see Table \ref{tab:fullfall2018} in the Appendix. 
 
 
 \setcounter{chapter}{5}
@@ -675,7 +677,8 @@ The accordance of \code{pandas} with the CRUD principles allows for efficient fi
 An example for these functions can be seen in listing \ref{lst:pypd}. The data set is loaded into a dataframe in line 3. \\
 The first filtering operation is seen in line 6, where every row in the dataframe, that does not have a value between 25 and 35 in the column \code{Enrollment}, is removed. That is achieved by using the function \code{loc[]}, which returns a set of all rows that match the given condition, which is in this case: $|e - 30| < 5$, for all $e$ entries of the column \code{Enrollment}.
 After the data is filtered for all the restrictions, it has to be brought into the format necessary for the comparison to the theoretical result from chapter 2. Only the 5 grades \code{A} to \code{F}, without plus or minus, were considered in the theoretical approach. To get the corresponding format with the given data, all the plus and minus grades were counted as their base grade. \code{pandas} supports accessing entire columns by their name, as seen in lines 9 to 11, which merge the grade columns accordingly. 
-The last line of listing \ref{lst:pypd} extracts only the necessary grade columns from the data, that can then be used to calculate the EMD.
+The last line of listing \ref{lst:pypd} extracts only the necessary grade columns from the data, that can then be used to calculate the EMD.\\
+
 
 
 \begin{minipage}{\linewidth}
@@ -686,7 +689,7 @@ The last line of listing \ref{lst:pypd} extracts only the necessary grade column
 	data = pd.read_csv('data.csv')
 	
 	# Filtering for classes with 25-35 students
-	data = data.loc[abs(data['Enrollment'] - 30) < 5]
+	data = data.loc[abs(data['Enrollment'] - 30) <= 5]
 	
 	# Merge plus/minus grades and base grade, eg. B+, B and B- all get 
 	# counted as B
@@ -754,7 +757,7 @@ The last line of listing \ref{lst:pypd} extracts only the necessary grade column
 	  # If not, start new recursive step with every possible 
 	  # number appended to the composition
 	  for i in range(n-sum(current)+1):
-		  if len(current) < k and current not in all_comps:
+		  if len(current) < k and (current+[i]) not in all_comps:
 		    rec_compositions(n, k, current + [i], all_comps)
     return all_comps
 
@@ -803,78 +806,78 @@ The last line of listing \ref{lst:pypd} extracts only the necessary grade column
 		%
 		\endhead
 		%
-		0  & Music                           & 127   & 35                & 2.98  & 11 & 14 & 7 & 1 & 1 \\
-		1  & Business Administration         & 335   & 30                & 347 & 12 & 9  & 3 & 3 & 1 \\
-		2  & Business Administration         & 404   & 34                & 319 & 11 & 14 & 8 & 0 & 1 \\
-		3  & Business Administration         & 404   & 25                & 2.987 & 6  & 13 & 5 & 0 & 0 \\
-		4  & Business Administration         & 409   & 31                & 2.956 & 5  & 20 & 4 & 1 & 1 \\
-		5  & Business Administration         & 409   & 34                & 2.961 & 3  & 27 & 4 & 0 & 0 \\
-		6  & Business Administration         & 451   & 29                & 2.913 & 3  & 20 & 2 & 2 & 0 \\
-		7  & Business Administration         & 453   & 25                & 2.988 & 11 & 9  & 2 & 2 & 1 \\
-		8  & Business Administration         & 454   & 27                & 313 & 7  & 11 & 7 & 0 & 0 \\
-		9  & Business Administration         & 551   & 34                & 2.921 & 11 & 12 & 8 & 3 & 0 \\
-		10 & Business Administration         & 600   & 35                & 391 & 9  & 22 & 0 & 1 & 1 \\
-		11 & Business Administration         & 703   & 25                & 2.986 & 10 & 6  & 6 & 0 & 1 \\
-		12 & Business Management             & 705   & 27                & 387 & 11 & 10 & 5 & 0 & 1 \\
-		13 & Curriculum and Instruction      & 112   & 30                & 387 & 12 & 9  & 4 & 1 & 1 \\
-		14 & Curriculum and Instruction      & 301   & 30                & 2.954 & 10 & 13 & 3 & 1 & 2 \\
-		15 & Curriculum and Instruction      & 650   & 30                & 2.953 & 15 & 5  & 4 & 1 & 3 \\
-		16 & Educational Psychology          & 330   & 35                & 31  & 10 & 15 & 7 & 1 & 0 \\
-		17 & Exceptional Education           & 303   & 26                & 354 & 6  & 15 & 4 & 0 & 0 \\
-		18 & Exceptional Education           & 330   & 31                & 345 & 4  & 20 & 5 & 0 & 0 \\
-		19 & Civil \& Envrnmntal Engineering & 456   & 26                & 338 & 7  & 13 & 6 & 0 & 0 \\
-		20 & Industrial/Manufacturing Engr   & 583   & 25                & 38  & 10 & 8  & 7 & 0 & 0 \\
-		21 & Mechanical Engineering          & 469   & 30                & 2.918 & 7  & 12 & 7 & 3 & 0 \\
-		22 & Commun Sciences \& Disorders    & 380   & 29                & 336 & 15 & 6  & 6 & 1 & 1 \\
-		23 & Kinesiology                     & 200   & 29                & 2.947 & 10 & 4  & 1 & 2 & 2 \\
-		24 & Information Studies             & 310   & 35                & 359 & 16 & 12 & 2 & 1 & 3 \\
-		25 & Information Studies             & 370   & 26                & 342 & 8  & 12 & 3 & 0 & 1 \\
-		26 & African \& African Diaspora St  & 125   & 25                & 2.95  & 8  & 7  & 3 & 0 & 2 \\
-		27 & Anthropology                    & 403   & 28                & 2.975 & 6  & 14 & 6 & 0 & 0 \\
-		28 & Art History                     & 250   & 33                & 2.92  & 12 & 5  & 5 & 1 & 2 \\
-		29 & Art History                     & 472   & 34                & 2.951 & 13 & 5  & 7 & 0 & 2 \\
-		30 & Biological Sciences             & 529   & 28                & 34  & 11 & 7  & 6 & 0 & 1 \\
-		31 & Chemistry and Biochemistry      & 341   & 33                & 311 & 14 & 10 & 4 & 3 & 1 \\
-		32 & Communication                   & 101   & 27                & 3   & 6  & 13 & 1 & 1 & 1 \\
-		33 & Communication                   & 363   & 25                & 397 & 10 & 7  & 4 & 0 & 0 \\
-		34 & Communication                   & 410   & 25                & 2.917 & 7  & 9  & 1 & 2 & 1 \\
-		35 & Economics                       & 210   & 26                & 2.937 & 13 & 7  & 3 & 1 & 2 \\
-		36 & Economics                       & 325   & 35                & 2.918 & 12 & 11 & 7 & 1 & 1 \\
-		37 & English                         & 205   & 26                & 354 & 7  & 13 & 5 & 0 & 0 \\
-		38 & English                         & 205   & 26                & 2.903 & 4  & 16 & 2 & 1 & 1 \\
-		39 & English                         & 205   & 26                & 2.957 & 14 & 4  & 0 & 0 & 5 \\
-		40 & English                         & 205   & 25                & 2.914 & 12 & 6  & 1 & 1 & 3 \\
-		41 & English                         & 215   & 26                & 3   & 7  & 12 & 4 & 1 & 0 \\
-		42 & English                         & 215   & 25                & 344 & 9  & 10 & 2 & 1 & 1 \\
-		43 & English                         & 233   & 25                & 2.954 & 8  & 9  & 2 & 0 & 3 \\
-		44 & English                         & 310   & 25                & 33  & 7  & 11 & 5 & 0 & 0 \\
-		45 & English                         & 517   & 25                & 2.931 & 7  & 12 & 3 & 2 & 0 \\
-		46 & Food \& Beverage Studies        & 101   & 25                & 2.934 & 10 & 9  & 3 & 1 & 2 \\
-		47 & Geosciences                     & 106   & 31                & 313 & 12 & 8  & 2 & 2 & 2 \\
-		48 & Linguistics                     & 210   & 26                & 326 & 9  & 11 & 5 & 1 & 0 \\
-		49 & Linguistics                     & 210   & 25                & 398 & 11 & 10 & 0 & 1 & 2 \\
-		50 & Mathematical Sciences           & 98    & 28                & 3   & 16 & 4  & 4 & 1 & 3 \\
-		51 & Mathematical Sciences           & 98    & 30                & 345 & 15 & 7  & 5 & 1 & 2 \\
-		52 & Mathematical Sciences           & 98    & 29                & 336 & 10 & 12 & 4 & 1 & 1 \\
-		53 & Mathematical Sciences           & 105   & 28                & 339 & 13 & 6  & 5 & 1 & 1 \\
-		54 & Mathematical Sciences           & 105   & 28                & 2.936 & 9  & 10 & 4 & 2 & 1 \\
-		55 & Mathematical Sciences           & 105   & 27                & 387 & 12 & 5  & 3 & 2 & 1 \\
-		56 & Mathematical Sciences           & 108   & 25                & 2.933 & 9  & 7  & 6 & 3 & 0 \\
-		57 & Mathematical Sciences           & 232   & 32                & 349 & 12 & 8  & 3 & 2 & 2 \\
-		58 & Mathematical Sciences           & 233   & 32                & 311 & 10 & 14 & 5 & 2 & 0 \\
-		59 & Philosophy                      & 101   & 29                & 359 & 11 & 5  & 6 & 1 & 0 \\
-		60 & Philosophy                      & 243   & 25                & 335 & 7  & 8  & 2 & 2 & 0 \\
-		61 & Philosophy                      & 250   & 30                & 317 & 10 & 8  & 1 & 0 & 2 \\
-		62 & Political Science               & 361   & 33                & 311 & 8  & 17 & 2 & 3 & 0 \\
-		63 & Sociology                       & 361   & 33                & 392 & 10 & 14 & 4 & 0 & 1 \\
-		64 & Women's and Gender Studies      & 201   & 35                & 343 & 11 & 13 & 6 & 0 & 1 \\
-		65 & Nursing                         & 673   & 28                & 348 & 5  & 21 & 2 & 0 & 0 \\
-		66 & Criminal Justice                & 105   & 28                & 2.988 & 18 & 3  & 0 & 1 & 5 \\
-		67 & Criminal Justice                & 460   & 32                & 2.969 & 15 & 9  & 4 & 1 & 2 \\
-		68 & Criminal Justice                & 662   & 28                & 2.904 & 9  & 9  & 8 & 1 & 1 \\
-		69 & Social Work                     & 753   & 31                & 2.964 & 7  & 14 & 6 & 0 & 1 \\
-		70 & Architecture                    & 380   & 27                & 2.987 & 5  & 16 & 4 & 0 & 1 \\
-		71 & Urban Planning                  & 316   & 28                & 343 & 7  & 14 & 2 & 1 & 0
+		1  & Music                           & 127   & 35                & 2.98  & 11 & 14 & 7 & 1 & 1 \\
+2  & Business Administration         & 335   & 30                & 347 & 12 & 9  & 3 & 3 & 1 \\
+3  & Business Administration         & 404   & 34                & 319 & 11 & 14 & 8 & 0 & 1 \\
+4  & Business Administration         & 404   & 25                & 2.987 & 6  & 13 & 5 & 0 & 0 \\
+5  & Business Administration         & 409   & 31                & 2.956 & 5  & 20 & 4 & 1 & 1 \\
+6  & Business Administration         & 409   & 34                & 2.961 & 3  & 27 & 4 & 0 & 0 \\
+7  & Business Administration         & 451   & 29                & 2.913 & 3  & 20 & 2 & 2 & 0 \\
+8  & Business Administration         & 453   & 25                & 2.988 & 11 & 9  & 2 & 2 & 1 \\
+9  & Business Administration         & 454   & 27                & 313 & 7  & 11 & 7 & 0 & 0 \\
+10  & Business Administration         & 551   & 34                & 2.921 & 11 & 12 & 8 & 3 & 0 \\
+11 & Business Administration         & 600   & 35                & 391 & 9  & 22 & 0 & 1 & 1 \\
+12 & Business Administration         & 703   & 25                & 2.986 & 10 & 6  & 6 & 0 & 1 \\
+13 & Business Management             & 705   & 27                & 387 & 11 & 10 & 5 & 0 & 1 \\
+14 & Curriculum and Instruction      & 112   & 30                & 387 & 12 & 9  & 4 & 1 & 1 \\
+15 & Curriculum and Instruction      & 301   & 30                & 2.954 & 10 & 13 & 3 & 1 & 2 \\
+16 & Curriculum and Instruction      & 650   & 30                & 2.953 & 15 & 5  & 4 & 1 & 3 \\
+17 & Educational Psychology          & 330   & 35                & 31  & 10 & 15 & 7 & 1 & 0 \\
+18 & Exceptional Education           & 303   & 26                & 354 & 6  & 15 & 4 & 0 & 0 \\
+19 & Exceptional Education           & 330   & 31                & 345 & 4  & 20 & 5 & 0 & 0 \\
+20 & Civil \& Envrnmntal Engineering & 456   & 26                & 338 & 7  & 13 & 6 & 0 & 0 \\
+21 & Industrial/Manufacturing Engr   & 583   & 25                & 38  & 10 & 8  & 7 & 0 & 0 \\
+22 & Mechanical Engineering          & 469   & 30                & 2.918 & 7  & 12 & 7 & 3 & 0 \\
+23 & Commun Sciences \& Disorders    & 380   & 29                & 336 & 15 & 6  & 6 & 1 & 1 \\
+24 & Kinesiology                     & 200   & 29                & 2.947 & 10 & 4  & 1 & 2 & 2 \\
+25 & Information Studies             & 310   & 35                & 359 & 16 & 12 & 2 & 1 & 3 \\
+26 & Information Studies             & 370   & 26                & 342 & 8  & 12 & 3 & 0 & 1 \\
+27 & African \& African Diaspora St  & 125   & 25                & 2.95  & 8  & 7  & 3 & 0 & 2 \\
+28 & Anthropology                    & 403   & 28                & 2.975 & 6  & 14 & 6 & 0 & 0 \\
+29 & Art History                     & 250   & 33                & 2.92  & 12 & 5  & 5 & 1 & 2 \\
+30 & Art History                     & 472   & 34                & 2.951 & 13 & 5  & 7 & 0 & 2 \\
+31 & Biological Sciences             & 529   & 28                & 34  & 11 & 7  & 6 & 0 & 1 \\
+32 & Chemistry and Biochemistry      & 341   & 33                & 311 & 14 & 10 & 4 & 3 & 1 \\
+33 & Communication                   & 101   & 27                & 3   & 6  & 13 & 1 & 1 & 1 \\
+34 & Communication                   & 363   & 25                & 397 & 10 & 7  & 4 & 0 & 0 \\
+35 & Communication                   & 410   & 25                & 2.917 & 7  & 9  & 1 & 2 & 1 \\
+36 & Economics                       & 210   & 26                & 2.937 & 13 & 7  & 3 & 1 & 2 \\
+37 & Economics                       & 325   & 35                & 2.918 & 12 & 11 & 7 & 1 & 1 \\
+38 & English                         & 205   & 26                & 354 & 7  & 13 & 5 & 0 & 0 \\
+39 & English                         & 205   & 26                & 2.903 & 4  & 16 & 2 & 1 & 1 \\
+40 & English                         & 205   & 26                & 2.957 & 14 & 4  & 0 & 0 & 5 \\
+41 & English                         & 205   & 25                & 2.914 & 12 & 6  & 1 & 1 & 3 \\
+42 & English                         & 215   & 26                & 3   & 7  & 12 & 4 & 1 & 0 \\
+43 & English                         & 215   & 25                & 344 & 9  & 10 & 2 & 1 & 1 \\
+44 & English                         & 233   & 25                & 2.954 & 8  & 9  & 2 & 0 & 3 \\
+45 & English                         & 310   & 25                & 33  & 7  & 11 & 5 & 0 & 0 \\
+46 & English                         & 517   & 25                & 2.931 & 7  & 12 & 3 & 2 & 0 \\
+47 & Food \& Beverage Studies        & 101   & 25                & 2.934 & 10 & 9  & 3 & 1 & 2 \\
+48 & Geosciences                     & 106   & 31                & 313 & 12 & 8  & 2 & 2 & 2 \\
+49 & Linguistics                     & 210   & 26                & 326 & 9  & 11 & 5 & 1 & 0 \\
+50 & Linguistics                     & 210   & 25                & 398 & 11 & 10 & 0 & 1 & 2 \\
+51 & Mathematical Sciences           & 98    & 28                & 3   & 16 & 4  & 4 & 1 & 3 \\
+52 & Mathematical Sciences           & 98    & 30                & 345 & 15 & 7  & 5 & 1 & 2 \\
+53 & Mathematical Sciences           & 98    & 29                & 336 & 10 & 12 & 4 & 1 & 1 \\
+54 & Mathematical Sciences           & 105   & 28                & 339 & 13 & 6  & 5 & 1 & 1 \\
+55 & Mathematical Sciences           & 105   & 28                & 2.936 & 9  & 10 & 4 & 2 & 1 \\
+56 & Mathematical Sciences           & 105   & 27                & 387 & 12 & 5  & 3 & 2 & 1 \\
+57 & Mathematical Sciences           & 108   & 25                & 2.933 & 9  & 7  & 6 & 3 & 0 \\
+58 & Mathematical Sciences           & 232   & 32                & 349 & 12 & 8  & 3 & 2 & 2 \\
+59 & Mathematical Sciences           & 233   & 32                & 311 & 10 & 14 & 5 & 2 & 0 \\
+60 & Philosophy                      & 101   & 29                & 359 & 11 & 5  & 6 & 1 & 0 \\
+61 & Philosophy                      & 243   & 25                & 335 & 7  & 8  & 2 & 2 & 0 \\
+62 & Philosophy                      & 250   & 30                & 317 & 10 & 8  & 1 & 0 & 2 \\
+63 & Political Science               & 361   & 33                & 311 & 8  & 17 & 2 & 3 & 0 \\
+64 & Sociology                       & 361   & 33                & 392 & 10 & 14 & 4 & 0 & 1 \\
+65 & Women's and Gender Studies      & 201   & 35                & 343 & 11 & 13 & 6 & 0 & 1 \\
+66 & Nursing                         & 673   & 28                & 348 & 5  & 21 & 2 & 0 & 0 \\
+67 & Criminal Justice                & 105   & 28                & 2.988 & 18 & 3  & 0 & 1 & 5 \\
+68 & Criminal Justice                & 460   & 32                & 2.969 & 15 & 9  & 4 & 1 & 2 \\
+69 & Criminal Justice                & 662   & 28                & 2.904 & 9  & 9  & 8 & 1 & 1 \\
+70 & Social Work                     & 753   & 31                & 2.964 & 7  & 14 & 6 & 0 & 1 \\
+71 & Architecture                    & 380   & 27                & 2.987 & 5  & 16 & 4 & 0 & 1 \\
+72 & Urban Planning                  & 316   & 28                & 343 & 7  & 14 & 2 & 1 & 0
 	\end{longtable}
 \end{center}
 
